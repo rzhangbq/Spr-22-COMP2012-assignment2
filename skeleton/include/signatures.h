@@ -17,8 +17,11 @@ class Signature
 {
 public:
     // Todo
+    Signature();
+    virtual ~Signature();
 
     SigType GetType() const;
+    virtual void Print() const = 0;
     
 };
 
@@ -26,6 +29,8 @@ class SchnorrSignature : public Signature
 {
 public:
     //Todo
+    SchnorrSignature(const Number *s,const Number *e) : s(s), e(e) {}
+    ~SchnorrSignature();
 
     void Print() const
     {
@@ -44,6 +49,8 @@ class DSASignature : public Signature
 {
 public:
     //Todo
+    DSASignature(const Number *r,const Number *s) : r(r), s(s) {}
+    ~DSASignature();
 
     void Print() const
     {
@@ -62,7 +69,11 @@ class PublicKey
 {
 public:
     //Todo
+    PublicKey();
+    virtual ~PublicKey();
 
+    virtual bool Verify(const string &message, const Signature &signature) const = 0; //
+    virtual void Print() const = 0;
 };
 
 class SchnorrPublicKey : public PublicKey
@@ -85,7 +96,10 @@ class DSAPublicKey : public PublicKey
 public:
     const Number *y;
     //Todo
-    
+    DSAPublicKey(const Number *y) : y(y) {}
+    ~DSAPublicKey();
+
+    bool Verify(const string &message, const Signature &signature) const;
     void Print() const
     {
         cout << "DSA Public Key is: ";
@@ -98,6 +112,11 @@ class SecretKey
 {
 public:
     //Todo
+    SecretKey();
+    virtual ~SecretKey();
+
+    virtual const Signature *Sign(const string &message) const = 0; //
+    virtual void Print() const = 0;
 
 };
 
@@ -106,7 +125,10 @@ class SchnorrSecretKey : public SecretKey
 public:
     const Number *x;
     //Todo 
+    SchnorrSecretKey(const Number *x) : x(x) {}
+    ~SchnorrSecretKey();
     
+    const Signature *Sign(const string &message) const;
     void Print() const
     {
         cout << "Schnorr Secret Key is: ";
@@ -123,7 +145,6 @@ public:
     ~DSASecretKey();
 
     const Signature *Sign(const string &message) const;
-
     void Print() const
     {
         cout << "DSA Secret Key is: ";

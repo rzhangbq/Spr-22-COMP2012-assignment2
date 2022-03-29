@@ -15,6 +15,39 @@ SigType Signature::GetType() const
 
 //Todo: Constructors/Destructors
 
+Signature::Signature() {}
+Signature::~Signature() {}
+PublicKey::PublicKey() {}
+PublicKey::~PublicKey() {}
+SecretKey::SecretKey() {}
+SecretKey::~SecretKey() {}
+
+SchnorrSignature::~SchnorrSignature()
+{
+    cout << "Destruct SchnorrSignature..." << endl;
+}
+DSASignature::~DSASignature()
+{
+    cout << "Destruct DSASignature..." << endl;
+}
+SchnorrPublicKey::~SchnorrPublicKey()
+{
+    cout << "Destruct SchnorrPublicKey..." << endl;
+}
+DSAPublicKey::~DSAPublicKey()
+{
+    cout << "Destruct DSAPublicKey..." << endl;
+}
+SchnorrSecretKey::~SchnorrSecretKey()
+{
+    cout << "Destruct SchnorrSecretKey..." << endl;
+}
+DSASecretKey::~DSASecretKey()
+{
+    cout << "Destruct DSASecretKey..." << endl;
+}
+
+
 bool SchnorrPublicKey::Verify(const string &message, const Signature &signature) const
 {
     //Todo
