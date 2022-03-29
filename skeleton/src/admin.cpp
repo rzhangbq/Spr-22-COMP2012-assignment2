@@ -1,6 +1,7 @@
 #include "admin.h"
 #include "user.h"
 
+
 Admin::Admin()
 {
     cout << "P=";
